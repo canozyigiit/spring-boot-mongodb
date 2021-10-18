@@ -28,8 +28,8 @@ public class SwaggerConfig {
     private ApiInfo apiEndPointInfo(){
         return new ApiInfoBuilder()
                 .title("USER CRUD PROJECT")
-                .description("MongoDb")
-                .contact(new Contact("Can Ozyigit","https://github.com/canozyigiit/UserDemoProject","muhammetcanozyigit@gmail.com"))
+                .description("Spring Boot with MongoDB")
+                .contact(new Contact("Can Ozyigit","https://github.com/canozyigiit/spring-boot-mongoDB","muhammetcanozyigit@gmail.com"))
                 .version("1.0.0")
                 .build();
     }

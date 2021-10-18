@@ -15,12 +15,15 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     @Override
-    public User createUser(User user) {
+    public User createUser(User user)   {
+        if (user.getNationalityId().length() != 11){
+            throw new IllegalArgumentException("NationalityId must be 11 digits!");
+        }
         return userRepository.save(user);
     }
 
     @Override
-    public User updateUser(User user, int userId) {
+    public User updateUser(User user, String userId) {
         User oldUser = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
         oldUser.setFirstName(user.getFirstName());
         oldUser.setLastName(user.getLastName());
@@ -36,14 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(int userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        userRepository.delete(user);
-        return user;
+    public void deleteUser(String userId) {
+
+        userRepository.deleteById(userId);
     }
 
     @Override
-    public User getUserById(int userId) {
+    public User getUserById(String userId) {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 }

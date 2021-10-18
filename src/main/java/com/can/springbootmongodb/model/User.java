@@ -18,8 +18,7 @@ import java.util.Date;
 @Document(collection = "users")
 public class User {
     @Id
-    @NotNull
-    private Integer id;
+    private String id;
     @Size(min = 2,max = 30)
     @NotEmpty
     private String firstName;
@@ -31,6 +30,7 @@ public class User {
     @NotEmpty
     private String email;
     @NotEmpty
+
     private String nationalityId;
     @Past
     @NotNull
