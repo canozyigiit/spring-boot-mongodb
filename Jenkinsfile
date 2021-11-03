@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    IMAGE_REGISTRY = 'canozyigiit/spring-boot-mongodb'
+    IMAGE_REGISTRY = "canozyigiit/spring-boot-mongodb"
     IMAGE_VERSION = 'latest'
     IMAGE_REGISTRY_CREDENTIAL = 'dockerhub'
     DOCKER_REGISTRY_URL = ""
@@ -26,7 +26,7 @@ pipeline {
         stage('Docker Publish') {
             steps {
                 withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://registry.hub.docker.com"]) {
-                    sh "docker push ${IMAGE_REGISTRY}"
+                    sh "docker push ${IMAGE_REGISTRY}:${IMAGE_VERSION}"
                 }
             }
         }
