@@ -29,17 +29,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy Docker-compose') {
-            steps {
-                sh "docker-compose -f /opt/das-deployment/docker-compose.yaml stop "
-                withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://hub.docker.com/repository/docker/canozyigiit/spring-boot-mongodb"]) {
-                sh "docker-compose -f /opt/das-deployment/docker-compose.yaml pull "
-                }
-                dir('/opt/das-deployment') {
-                sh "docker-compose up -d"
-                }
-            }
-        }
     }
   }
