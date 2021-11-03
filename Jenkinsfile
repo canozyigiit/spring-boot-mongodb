@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Docker Publish') {
             steps {
-                withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://hub.docker.com"]) {
+                withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://registry.hub.docker.com"]) {
                     sh "docker push ${IMAGE_REGISTRY}"
                 }
             }
