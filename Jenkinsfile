@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Docker Publish') {
             steps {
-                withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: ""]) {
+                withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://hub.docker.com/repository/docker/canozyigiit/spring-boot-mongodb"]) {
                     sh "docker push ${IMAGE_REGISTRY}"
                 }
             }
