@@ -5,6 +5,8 @@ pipeline {
     IMAGE_VERSION = 'latest'
     IMAGE_REGISTRY_CREDENTIAL = 'dockerhub'
     DOCKER_REGISTRY_URL = ""
+    USERNAME='canozyigiit'
+    PASSWORD='verylongpasswordhere'
   }
     stages {
         stage('Build') {
@@ -27,6 +29,11 @@ pipeline {
                 withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://hub.docker.com/repository/docker/canozyigiit/spring-boot-mongodb"]) {
                 sh "docker push ${IMAGE_REGISTRY}:${IMAGE_VERSION}"
                 }
+                withCredentials([usernamePassword( credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", usernameVariable: "${USERNAME}", passwordVariable: "${PASSWORD}")]) {
+
+                docker.withRegistry('', 'docker-hub-credentials') {
+                sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                sh "docker push ${IMAGE_REGISTRY}:${IMAGE_VERSION}"
             }
         }
     }
