@@ -23,7 +23,7 @@ pipeline {
                 """
             }
         }
-    stage('Push image') {
+    stage('Docker Publish') {
         withCredentials([usernamePassword( credentialsId: 'docker-hub-credentials', usernameVariable: "${USERNAME}", passwordVariable: "${PASSWORD}")]) {
             docker.withRegistry('', 'docker-hub-credentials') {
                  sh "docker login -u ${USERNAME} -p ${PASSWORD}"
