@@ -1,12 +1,10 @@
 pipeline {
   agent any
   environment {
-    IMAGE_REGISTRY = "canozyigiit/spring-boot-mongodb"
+    IMAGE_REGISTRY = "canozyigiit/spring-jenkinsfile-ex"
     IMAGE_VERSION = 'latest'
     IMAGE_REGISTRY_CREDENTIAL = 'dockerhub'
     DOCKER_REGISTRY_URL = ""
-    USERNAME='canozyigiit'
-    PASSWORD='verylongpasswordhere'
   }
     stages {
         stage('Build') {
