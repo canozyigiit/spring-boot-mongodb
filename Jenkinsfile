@@ -25,6 +25,7 @@ pipeline {
        stage('Push image') {
             steps {
                 withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://registry.hub.docker.com"]) {
+                    sh "docker login -u 'canozyigiit' -p 'verylongpasswordhere' "
                     sh "docker push ${IMAGE_REGISTRY}:${IMAGE_VERSION}"
                 }
             }
