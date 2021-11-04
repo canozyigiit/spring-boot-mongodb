@@ -25,7 +25,7 @@
 //        stage('Build image') {
 //                /* This builds the actual image */
 //
-//                app = docker.build("canozyigiit/spring-jenkinsfile-ex")
+//                docker.build("canozyigiit/spring-jenkinsfile-ex")
 //        }
 //
 //        stage('Test image') {
@@ -44,19 +44,26 @@
 //     }
 //   }
 node {
-    def app
-
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
         checkout scm
     }
 
-    stage('Build image') {
-        /* This builds the actual image */
-
-        app = docker.build("canozyigiit/spring-jenkinsfile-ex")
-    }
+    stage('Build') {
+                agent {
+                    docker {
+                        image 'maven:3.8.1-adoptopenjdk-11'
+                        args '-v $HOME/.m2:/root/.m2'
+                        reuseNode true
+                    }
+                }
+                steps {
+                    sh """
+                    mvn compile jib:dockerBuild
+                    """
+                }
+           }
 
     stage('Test image') {
 
