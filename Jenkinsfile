@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  def app
   environment {
     IMAGE_REGISTRY = "canozyigiit/spring-jenkinsfile-ex"
     IMAGE_VERSION = 'latest'
