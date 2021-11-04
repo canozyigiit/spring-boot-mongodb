@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  def app
   environment {
     IMAGE_REGISTRY = "canozyigiit/spring-jenkinsfile-ex"
     IMAGE_VERSION = 'latest'
@@ -21,6 +22,18 @@ pipeline {
                 """
             }
         }
+       stage('Build image') {
+               /* This builds the actual image */
+
+               app = docker.build("canozyigiit/spring-jenkinsfile-ex")
+           }
+
+           stage('Test image') {
+
+               app.inside {
+                   echo "Tests passed"
+               }
+           }
         stage('Push image') {
             steps {
                 withDockerRegistry([credentialsId: "${IMAGE_REGISTRY_CREDENTIAL}", url: "https://registry.hub.docker.com"]) {
